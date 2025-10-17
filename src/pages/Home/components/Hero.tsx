@@ -15,22 +15,30 @@ const Hero = () => {
     className="absolute left-0 top-0 h-full w-full object-cover object-center md:object-bottom z-0"
   />
 
+
+{/* dark mode if(dark===true){} */}
   {/* Gradient overlay (visible, above image but below text) */}
-  <div
+  {/* <div
     aria-hidden="true"
     className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/10 to-black/40 z-[1]"
-  ></div>
+  ></div> */}
+
+
+
+
+  
 
   {/* Content */}
   <div className="relative z-[2] mx-auto w-full max-w-[1270px] px-4 sm:px-6 lg:h-full lg:px-8">
     <div className="grid w-full grid-cols-12 lg:h-full">
       <div className="col-span-12 pt-[60px] md:col-span-7 md:pt-[90px] lg:pt-[120px] text-white">
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-baloo-da font-bold leading-tight">
-          একাডেমিক থেকে এডমিশন
+          শুরুটা হোক শেখাশিখির সাথে -
+
         </h1>
 
         <p className="pt-2 font-baloo-da text-lg">
-          প্রস্তুতি নাও দেশ সেরা শিক্ষক ও প্রযুক্তির সাথে
+          নিজেকে এক ধাপ এগিয়ে নাও আজ থেকেই!
         </p>
 
         {/* Buttons */}
