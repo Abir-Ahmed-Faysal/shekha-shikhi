@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import type { ICourse } from "../../../lib/types/ICourse";
+import type { ICourse } from "../../../types/ICourse";
 
 interface SingleCourseProps {
   course: ICourse;

@@ -43,22 +43,27 @@ export default function ShikhoProgramSection() {
   const current = PROGRAMS[active];
 
   return (
-    <section
-      className="max-w-7xl mx-auto px-4 py-12 bg-no-repeat bg-cover bg-center rounded-2xl"
-      style={{
-        backgroundColor: "#1A213A", // Dark blue overlay
-        backgroundImage:
-          "url('https://res.cloudinary.com/cross-border-education-technologies-pte-ltd/image/upload/v1659956648/zi32ytdlcmfwzom46xzz.png')",
-      }}
-    >
+<section
+  className="w-full mx-auto px-4 py-16 bg-no-repeat "
+  style={{
+    backgroundColor: "#1A213A",
+    backgroundImage:
+      "url('https://i.ibb.co.com/tpFJRtYr/Chat-GPT-Image-Oct-17-2025-03-07-30-PM-min.png'), url('https://i.ibb.co.com/tpFJRtYr/Chat-GPT-Image-Oct-17-2025-03-07-30-PM-min.png')",
+    backgroundPosition: " top right, bottom left",
+    backgroundRepeat: "no-repeat, no-repeat",
+    backgroundSize: "350px, 550px", 
+  }}
+>
+
+
 
 
       {/* Header */}
       <div className="text-center mb-10">
-        <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2">
+        <h2 className="text-2xl text-white md:text-3xl font-bold  mb-2">
           Shikho একাডেমিক প্রোগ্রামে যা যা থাকছে
         </h2>
-        <h3 className="text-gray-600 text-base md:text-lg">
+        <h3 className="text-white md:text-lg">
           ক্লাসের পড়ায় ও বোর্ড পরীক্ষার প্রস্তুতিতে সবার চেয়ে এগিয়ে রাখতে এই
           প্রোগ্রামে রয়েছে —
         </h3>
@@ -67,7 +72,7 @@ export default function ShikhoProgramSection() {
       {/* Layout */}
       <div className="flex flex-col md:flex-row items-center gap-10">
         {/* Left: Tabs */}
-        <div className="w-full md:w-1/3 flex flex-wrap md:flex-col gap-3">
+        <div className="w-full hidden md:w-1/3 md:flex flex-wrap md:flex-col gap-3">
           {PROGRAMS.map((p, idx) => (
             <button
               key={p.id}

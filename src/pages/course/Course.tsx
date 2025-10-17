@@ -2,7 +2,7 @@ import { Link, useParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import SingleCourse from "./components/SingleCourse";
 import { GetData } from "../../lib/api/api";
-import type { ICourse } from "../../lib/types/ICourse";
+import type { ICourse } from "../../types/ICourse";
 
 export type Class = {
   id: string;

@@ -1,5 +1,5 @@
 import { useState, type ReactNode } from "react";
-import type { ICourseContext } from "../lib/types/CourseContext";
+import type { ICourseContext } from "../types/CourseContext";
 import { Context } from "./Context";
 
 export type IValue = {

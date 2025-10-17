@@ -1,2 +1,33 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+
+
+
+.mySwiper { padding-bottom: 2.5rem; }
+.mySwiper .swiper-pagination {
+  bottom: 0.5rem !important;
+  top: auto !important;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+
+/* All bullets */
+.mySwiper .swiper-pagination-bullet {
+  width: 8px;                /* default small bullets */
+  height: 8px;
+  background-color: #ccc;
+  opacity: 0.6;
+  border-radius: 50%;        /* round */
+  transition: all 0.3s ease; /* smooth animation */
+}
+
+/* Active bullet: capsule shape */
+.mySwiper .swiper-pagination-bullet-active {
+  width: 20px;               /* long capsule */
+  height: 8px;               /* same as default height for smooth transition */
+  background-color: #f76868;
+  opacity: 1;
+  border-radius: 4px;        /* height / 2 for perfect capsule */
+}
