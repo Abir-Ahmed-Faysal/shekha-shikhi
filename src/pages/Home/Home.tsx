@@ -1,5 +1,4 @@
-
-import ShikhoProgramSection from "./components/ShikhoProgramTabs";
+import ProgramSection from "./components/ProgramSection";
 import CourseSection from "./components/CourseSection";
 import Hero from "./components/Hero";
 import CuroselSection from "./components/CuroselSection";
@@ -9,7 +8,7 @@ const Home = () => {
     <div>
       <Hero></Hero>
       <CourseSection></CourseSection>
-      <ShikhoProgramSection></ShikhoProgramSection>
+      <ProgramSection></ProgramSection>
       <CuroselSection></CuroselSection>
     </div>
   );

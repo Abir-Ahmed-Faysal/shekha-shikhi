@@ -1,62 +1,42 @@
 import { Link, useParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
-import SingleCourse from "./components/SingleCourse";
+import SingleClassCourse from "./components/SingleCourse";
 import { GetData } from "../../lib/api/api";
 import type { ICourse } from "../../types/ICourse";
 
-export type Class = {
+/** Navigation options */
+export type INavOption = {
   id: string;
   label: string;
   path: string;
 };
 
-const primaryCourses: Class[] = [
-  { id: "1", label: "ক্লাস 1", path: "/courses/primary" },
-  { id: "2", label: "ক্লাস 2", path: "/courses/primary" },
-  { id: "3", label: "ক্লাস 3", path: "/courses/primary" },
-  { id: "4", label: "ক্লাস 4", path: "/courses/primary" },
-  { id: "5", label: "ক্লাস 5", path: "/courses/primary" },
+const navOption: INavOption[] = [
+  { id: "1", label: "আমার কোর্সসমূহ", path: "/courses/my-course" },
+  { id: "2", label: "রুটিন", path: "/courses/routine" },
+  { id: "3", label: "লার্নিং রিপোর্ট", path: "/courses/learning-report" },
+  { id: "4", label: "সাবস্ক্রিপশন", path: "/courses/subscription" },
 ];
 
-const secondaryCourses: Class[] = [
-  { id: "6", label: "ক্লাস 6", path: "/courses/secondary" },
-  { id: "7", label: "ক্লাস 7", path: "/courses/secondary" },
-  { id: "8", label: "ক্লাস 8", path: "/courses/secondary" },
-  { id: "9", label: "ক্লাস 9", path: "/courses/secondary" },
-  { id: "10", label: "ক্লাস 10", path: "/courses/secondary" },
-];
-
-const GetCourses = (category?: string) => {
-  switch (category) {
-    case "primary":
-      return primaryCourses;
-    case "secondary":
-      return secondaryCourses;
-    default:
-      return [...primaryCourses, ...secondaryCourses];
-  }
-};
-
+/**  Course component */
 export const CourseFn = () => {
   const { category } = useParams();
-  const courses = GetCourses(category);
 
   const { data, isLoading, error } = useQuery<ICourse[], Error>({
     queryKey: ["courses", category],
-    queryFn: () =>
-      GetData<ICourse[]>(`/api/courses/${category || "all"}`),
+    queryFn: () => GetData<ICourse[]>(`/api/grades/${category || "all"}`),
   });
 
   return (
-    <div className="space-y-8">
-      {/* ✅ Navbar always visible */}
+    <div className="space-y-8 px-4 md:px-8">
+      {/* 🔹 Navigation */}
       <nav className="w-full border-b pb-2">
         <ul className="flex flex-wrap gap-4 text-gray-700">
-          {courses.map(({ id, label, path }) => (
+          {navOption.map(({ id, label, path }) => (
             <li key={id}>
               <Link
                 to={path}
-                className="hover:text-blue-600 font-medium transition-colors"
+                className="font-medium text-gray-600 hover:text-blue-600 transition-colors duration-200"
               >
                 {label}
               </Link>
@@ -65,30 +45,48 @@ export const CourseFn = () => {
         </ul>
       </nav>
 
-      {/* ✅ Course list area */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 min-h-[200px]">
+      {/* 🔹 Courses grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 min-h-[250px]">
+        {/* Loading */}
         {isLoading && (
           <p className="col-span-full text-center py-4 text-gray-500">
             Loading courses...
           </p>
         )}
 
+        {/* Error */}
         {error && (
           <p className="col-span-full text-center text-red-500 py-4">
-            ⚠️ {error.message || "Failed to load courses"}
+            {error.message || "Failed to load courses"}
           </p>
         )}
 
+        {/* No data found */}
         {!isLoading && !error && data?.length === 0 && (
-          <p className="col-span-full text-center text-gray-600 py-4">
-            No courses found for this category.
-          </p>
+          <div className="col-span-full text-center py-10 text-gray-600">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="mx-auto h-12 w-12 text-gray-400"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 13h6m-3-3v6m9 2a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            <p className="mt-3 text-gray-500">No courses found for this category.</p>
+          </div>
         )}
 
+        {/* Data show */}
         {!isLoading &&
           !error &&
-          data?.map((course) => (
-            <SingleCourse key={course._id} course={course} />
+          data?.map((singleCls) => (
+            <SingleClassCourse key={singleCls._id} course={singleCls} />
           ))}
       </div>
     </div>

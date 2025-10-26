@@ -5,7 +5,7 @@ interface SingleCourseProps {
   course: ICourse;
 }
 
-const SingleCourse = ({ course }: SingleCourseProps) => {
+const SingleClassCourse = ({ course }: SingleCourseProps) => {
   return (
     <div className="border rounded-2xl p-4 bg-white shadow-sm hover:shadow-md transition-all duration-200">
       {/* Icon & Title */}
@@ -41,4 +41,4 @@ const SingleCourse = ({ course }: SingleCourseProps) => {
   );
 };
 
-export default SingleCourse;
+export default SingleClassCourse;

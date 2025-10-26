@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import {  Pagination, Autoplay } from "swiper/modules";
+import { Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 
@@ -105,21 +105,19 @@ export default function AnimatedLessonSection() {
 
         {/* ===== Swiper Carousel ===== */}
         <Swiper
-          modules={[ Pagination, Autoplay]}
+          modules={[Pagination, Autoplay]}
           spaceBetween={20}
           slidesPerView={1.4}
           loop={true}
-          
           pagination={{ clickable: true }}
           autoplay={{ delay: 2000, disableOnInteraction: false }}
           breakpoints={{
-            640: { slidesPerView: 1 },
-            1024: { slidesPerView: 3 },
-            1280: { slidesPerView: 4 },
+            0: { slidesPerView: 1, spaceBetween: 0 },
+            640: { slidesPerView: 1.2, spaceBetween: 15 },
+            1024: { slidesPerView: 3, spaceBetween: 20 },
+            1280: { slidesPerView: 4, spaceBetween: 20 },
           }}
           className="mySwiper pb-10 [&_.swiper-pagination]:bottom-2 [&_.swiper-pagination]:top-auto [&_.swiper-pagination]:!absolute"
-
-          
         >
           {filteredVideos.map((video) => (
             <SwiperSlide key={video.id}>

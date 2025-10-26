@@ -1,4 +1,4 @@
-import axios, { type AxiosInstance, type AxiosRequestConfig } from "axios";
+import axios, { type AxiosInstance, type AxiosRequestConfig, type AxiosError } from "axios";
 
 /** Create a single Axios instance */
 const axiosInstance: AxiosInstance = axios.create({
@@ -6,7 +6,7 @@ const axiosInstance: AxiosInstance = axios.create({
   timeout: 10000, // 10s default
 });
 
-/** Simple response interceptor for logging errors */
+/** Log API errors globally */
 axiosInstance.interceptors.response.use(
   (res) => res,
   (error) => {
@@ -15,40 +15,57 @@ axiosInstance.interceptors.response.use(
   }
 );
 
-
-
+/** Common Axios error handler */
+function handleAxiosError(err: unknown): never {
+  if (axios.isAxiosError(err)) {
+    const axiosError = err as AxiosError<{ message?: string }>;
+    if (axiosError.response?.status === 404) {
+      throw new Error(axiosError.response.data?.message || "Data not found");
+    }
+    throw new Error(axiosError.response?.data?.message || axiosError.message);
+  }
+  throw new Error("Unexpected error occurred");
+}
 
 /** GET request helper */
-export async function GetData<T >(url: string, config?: AxiosRequestConfig): Promise<T> {
-  const response = await axiosInstance.get<{ data: T }>(url, config);
-  return response.data.data;
+export async function GetData<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
+  try {
+    const response = await axiosInstance.get<{ data: T }>(url, config);
+    return response.data.data;
+  } catch (err) {
+    handleAxiosError(err);
+  }
 }
 
 /** POST request helper */
-export async function PostData<T >(
-  url: string,
-  payload?: unknown,
-  config?: AxiosRequestConfig
-): Promise<T> {
-  const response = await axiosInstance.post<{ data: T }>(url, payload, config);
-  return response.data.data;
+export async function PostData<T>(url: string, payload?: unknown, config?: AxiosRequestConfig): Promise<T> {
+  try {
+    const response = await axiosInstance.post<{ data: T }>(url, payload, config);
+    return response.data.data;
+  } catch (err) {
+    handleAxiosError(err);
+  }
 }
 
 /** PUT request helper */
-export async function PutData<T >(
-  url: string,
-  payload?: unknown,
-  config?: AxiosRequestConfig
-): Promise<T> {
-  const response = await axiosInstance.put<{ data: T }>(url, payload, config);
-  return response.data.data;
+export async function PutData<T>(url: string, payload?: unknown, config?: AxiosRequestConfig): Promise<T> {
+  try {
+    const response = await axiosInstance.put<{ data: T }>(url, payload, config);
+    return response.data.data;
+  } catch (err) {
+    handleAxiosError(err);
+  }
 }
 
 /** DELETE request helper */
-export async function DeleteData<T >(url: string, config?: AxiosRequestConfig): Promise<T> {
-  const response = await axiosInstance.delete<{ data: T }>(url, config);
-  return response.data.data;
+export async function DeleteData<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
+  try {
+    const response = await axiosInstance.delete<{ data: T }>(url, config);
+    return response.data.data;
+  } catch (err) {
+    handleAxiosError(err);
+  }
 }
 
-/** Optional: export instance if needed for advanced uses */
+/** Export instance for advanced use */
 export { axiosInstance };
